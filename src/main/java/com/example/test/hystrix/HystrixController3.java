@@ -12,14 +12,14 @@ import java.util.concurrent.TimeUnit;
 /**
  *  HystrixController3
  *
- * maxQueueSize：作业队列的最大值，默认值为 -1，设置为此值时，队列会使用 SynchronousQueue，此时其 size 为0。
- * Hystrix 不会向队列内存放作业。如果此值设置为一个正的 int 型，队列会使用一个固定 size 的 LinkedBlockingQueue。
- * 此时在核心线程池内的线程都在忙碌时，会将作业暂时存放在此队列内，但超出此队列的请求依然会被拒绝。
+ *  maxQueueSize：作业队列的最大值，默认值为 -1，设置为此值时，队列会使用 SynchronousQueue，此时其 size 为0
+ *  Hystrix 不会向队列内存放作业。如果此值设置为一个正的 int 型，队列会使用一个固定 size 的 LinkedBlockingQueue
+ *  此时在核心线程池内的线程都在忙碌时，会将作业暂时存放在此队列内，但超出此队列的请求依然会被拒绝。
  *
- * queueSizeRejectionThreshold：由于 maxQueueSize 值在线程池被创建后就固定了大小，
- * 如果需要动态修改队列长度的话可以设置此值，
- * 即使队列未满，队列内作业达到此值时同样会拒绝请求。
- * 此值默认是 5，所以有时候只设置了 maxQueueSize 也不会起作用。
+ *  queueSizeRejectionThreshold：由于 maxQueueSize 值在线程池被创建后就固定了大小，
+ *  如果需要动态修改队列长度的话可以设置此值，
+ *  即使队列未满，队列内作业达到此值时同样会拒绝请求。
+ *  此值默认是 5，所以有时候只设置了 maxQueueSize 也不会起作用
  */
 @RestController
 @RequestMapping("/hystrix3")
@@ -37,7 +37,7 @@ public class HystrixController3 {
 
     @HystrixCommand(commandProperties = {
             @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "1500"),
-            // 滑动统计的桶数量
+            /** 滑动统计的桶数量 */
             /**
              * 设置一个rolling window被划分的数量，若numBuckets＝10，rolling window＝10000，
              *那么一个bucket的时间即1秒。必须符合rolling window % numberBuckets == 0。默认1
@@ -77,4 +77,5 @@ public class HystrixController3 {
         System.out.println("default fail");
         return "default fail";
     }
+
 }
