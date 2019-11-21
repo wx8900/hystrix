@@ -27,7 +27,7 @@ public class HystrixController1 {
     }
 
     private String failback1() {
-        System.out.println("--->调用是failback1方法");
+        System.out.println("断路器已触发，调用是failback1方法, 并作相应的业务处理...");
         return "failback1";
     }
 
@@ -44,13 +44,13 @@ public class HystrixController1 {
 
     @HystrixCommand(fallbackMethod = "failback3")
     private String failback2() {
-        System.out.println("--->调用failback2接口...发生异常");
+        System.out.println("断路器已触发，调用是failback2方法, 发生异常...");
         throw new RuntimeException();
     }
 
     @HystrixCommand
     private String failback3() {
-        System.out.println("--->调用failback3接口...发生异常");
+        System.out.println("断路器已触发，调用是failback3方法, 发生异常...");
         throw new RuntimeException();
     }
 
