@@ -8,6 +8,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * HystrixController2
+ *
+ * dashboard:
+ *     访问Hystrix Dashboard主页：http://localhost:9001/hystrix
+ *     填入URL：  http://localhost:9001/hystrix.stream
+ *
+ *     测试：
+ *     请求一次 http://localhost:9001/hystrix2/test1?id=1
+ *     请求两次 http://localhost:9001/hystrix2/test1?id=2
+ *     2/3 = 66%, 即当错误率达到66%，看到控制台显示：Circuit: Open
+ */
 @RestController
 @RequestMapping("/hystrix2")
 @DefaultProperties(defaultFallback = "defaultFail")
